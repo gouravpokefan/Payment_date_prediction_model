@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Invoice List</title>
+</head>
+
+
+<body>
+
+  <header>
+    <div class = "row">
+      <div class = "column"><img src=".\images\abc1_logo.png" align="left"></div>
+  
+    <div class = "column"><img src=".\images\og_logo1.png" align="center" class = "img2"></div>
+    </div>
+  </header>
+<div class = "inv">
+  <h3>Invoice List</h3>
+</div>
+
+ <div class = "artboard">
+  <div class = "inp">
+    
+    <!-------------For Add---------------------->
+    <button id = "modalBtn" class = "button">&#43 Add</button>
+    <div id = "simpleModal" class = "modal">
+      <div class = "modal-content">
+        <div class = "modal-header">
+          <span class = "closeBtn">&times;</span>
+          <h2>Add Invoice</h2>
+        </div>
+        <div class = "modal-body">
+          <form>
+            <table>
+            <div>
+             <tr>
+              <td>Customer Name </td>
+              <td><input type="text"></td>
+             </tr>
+             <tr>
+              <td>Customer No.</td>
+              <td><input type="text"></td>
+             </tr>
+             <tr>
+              <td>Invoice No.</td>
+              <td><input type="text"> </td>
+             </tr>
+             <tr>
+              <td>Invoice Amount</td>
+              <td><input type="number"></td>
+             </tr>
+             </div>
+             <div>
+              <tr>
+                <td>Due Date</td>
+                <td><input type="date"></td>
+              </tr>
+              <tr>
+              <td>Notes</td>
+              <td><textarea rows="6" cols="50"></textarea></td>
+              </tr>
+            </div>
+        
+            </table>
+          </form>
+        </div>
+      <div class = "modal-footer">
+        <button class="btn">Add</button>
+        <button class="btn">clear</button>
+        <button class="btn">Cancel</button> 
+      </div>
+    </div>   
+    </div>
+<!---------------------------------->
+
+  <!---------------For Edit----------->
+<button id = "modalBtn1" class = "button">&#xf304 Edit</button>
+    <div id = "simpleModal1" class = "modal1">
+      <div class = "modal-content">
+        <div class = "modal-header">
+          <span class = "closeBtn1">&times;</span>
+          <h2>Edit Invoice</h2>
+        </div>
+        <div class = "modal-body">
+          <form>
+            <table>
+            <div>
+             <tr>
+              <td>Invoice Amount </td>
+              <td><input type="number"></td>
+             </tr>
+             </div>
+        
+            </table>
+          </form>
+        </div>
+      <div class = "modal-footer">
+        <button class="btn">Reset</button>
+        <button class="btn">Save</button>
+        <button class="btn">Cancel</button> 
+      </div>
+    </div>
+    </div> 
+<!---------------------------------->
+
+
+
+ <!---------------For Deletion----------->
+ <button id = "modalBtn2" class = "button">&#8722 Delete</button>
+ <div id = "simpleModal2" class = "modal2">
+   <div class = "modal-content">
+     <div class = "modal-header">
+       <span class = "closeBtn2">&times;</span>
+       <h2>Delete Record(s)?</h2>
+     </div>
+     <div class = "modal-body">
+       <form>
+         <table>
+         <div>
+          <tr>
+           <td>You'll lose your record(s) after this action.We can't recover them once you delete.</td>
+           <td>Are you sure you want to permanently delete them?</td>
+          </tr>
+          </div>
+     
+         </table>
+       </form>
+     </div>
+   <div class = "modal-footer">
+     <button class="btn">Delete</button>
+     <button class="btn">Cancel</button> 
+   </div>
+ </div>
+ </div> 
+<!---------------------------------->
+
+
+
+
+    <input type="text" placeholder="Search by Invoice Number" id = "btn1">
+  </div>
+    
+  <div class = "table-grid">
+     <table class ="table">
+       <tr>
+      <th id ="Customer">Customer#</th>
+      <th id = "Invoice">Invoice#</th>
+       <th id = "Invoice_amnt">Invoice Amount</th>
+      <th id = "Due_date">Due Date</th>
+      <th id = "Predicted_date">Predicted Payment Date</th></tr>
+		
+		<tr><tbody id = "main"></tbody>
+		</tr>
+		
+    
+     </table>
+    </div>
+    
+   
+    
+   
+
+     <div class="tableb">
+   
+      
+      </div>
+      
+
+ </div>
+
+    <script src="index.js"></script>
+    <table class = "table table-stripped">
+    <tbody id = "data"></tbody>
+    </table>
+    <script>
+    fetch('./index.json').then(
+    		res=>{
+    			res.json().then(
+    					data=>{
+    					 console.log(data);
+    					 if(data.length >0){
+    						var temp = "";
+    						data.forEach((u)=>{
+    							temp +="<tr>";
+    							temp += "<td>"+u.cust_number+"</td>";
+    							temp += "<td>"+u.doc_id+"</td>";
+    							temp += "<td>"+u.total_open_amount+"</td>";
+    							temp += "<td>"+u.due_in_date+"</td>";
+    							temp += "<td>"+u.predicted_payment_date+"</td>";
+    						})
+    						document.getElementById("main").innerHTML = temp; 
+    					} 
+    					}
+    		)
+    		}
+    		)
+    </script>
+   
+</body>
+
+
+</html>
